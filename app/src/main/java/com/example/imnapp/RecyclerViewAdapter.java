@@ -2,7 +2,6 @@ package com.example.imnapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,14 +38,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int current_index)
     {
         holder.myButton.setText(mData[current_index]);
-        Log.e("current_index", String.valueOf(current_index));
-
+//        Log.e("current_index", String.valueOf(current_index));
 
         int row = current_index/15;
         int col = current_index%15;
-        Log.e("row: ", String.valueOf(row));
-        Log.e("col: ", String.valueOf(col));
-
+//        Log.e("row: ", String.valueOf(row));
+//        Log.e("col: ", String.valueOf(col));
 
         if (row > 3 && col > 3)
         {

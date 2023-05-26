@@ -2,7 +2,6 @@ package com.example.imnapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -32,6 +29,7 @@ public class adapter extends FirebaseRecyclerAdapter<get_monster_info, adapter.v
     @Override
     protected void onBindViewHolder(@NonNull viewholder holder, int position, @NonNull get_monster_info model)
     {
+        Log.d("position", String.valueOf(position));
         holder.name.setText(getRef(position).getKey());
         holder.introduce.setText(model.getIntroduce());
         Glide.with(holder.img.getContext()).load(model.getPic_url()).into(holder.img);

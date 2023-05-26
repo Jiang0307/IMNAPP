@@ -35,7 +35,7 @@ public class IntroduceActivity extends AppCompatActivity
     private void init()
     {
         introBackimg = findViewById(R.id.introbackimgbtn);
-        Log.e("init","init");
+        Log.d("init","init");
         introBackimg.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -49,6 +49,7 @@ public class IntroduceActivity extends AppCompatActivity
         introtitle = findViewById(R.id.intro_title_text);
         intromsg = findViewById(R.id.intro_message_text);
 
+        // getStringExtra : 用name(key)得到資料(string)
         String introKey = getIntent().getStringExtra("getIntroduceKey");
 
         databaseReference = FirebaseDatabase.getInstance().getReference("monsters").child(introKey);
@@ -59,14 +60,11 @@ public class IntroduceActivity extends AppCompatActivity
             {
                 if (snapshot.exists())
                 {
-
                     intromsg.setText(snapshot.child("introduce").getValue().toString());
                     introtitle.setText(introKey);
                     Glide.with(introimg.getContext()).load(snapshot.child("pic_url").getValue().toString()).into(introimg);
-
                     introtitle.setVisibility(View.VISIBLE);
                     intromsg.setVisibility(View.VISIBLE);
-
                     viewAnimation();
                 }
             }

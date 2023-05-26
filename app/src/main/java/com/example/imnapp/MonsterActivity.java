@@ -16,7 +16,7 @@ import org.xmlpull.v1.XmlPullParser;
 
 public class MonsterActivity extends AppCompatActivity
 {
-
+    int monster_count;
     adapter adapter;
     RecyclerView recyclerView;
     ImageView attraction_backImg_Btn;
