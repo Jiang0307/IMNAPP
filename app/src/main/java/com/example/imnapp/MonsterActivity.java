@@ -30,7 +30,6 @@ public class MonsterActivity extends AppCompatActivity
         recyclerView = findViewById(R.id.attraction_recycler);
 
         attraction_backImg_Btn = findViewById(R.id.attraction_backimgbtn);
-
         attraction_backImg_Btn.setOnClickListener(new View.OnClickListener()
         {
             @Override

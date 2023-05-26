@@ -41,11 +41,7 @@ public class IntroduceActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Log.e("onClick","onClick");
-                Log.e("introtitle",String.valueOf(introtitle));
-                Log.e("intromsg",String.valueOf(intromsg));
                 finish();
-                //onBackPressed();
             }
         });
 
@@ -64,12 +60,9 @@ public class IntroduceActivity extends AppCompatActivity
                 if (snapshot.exists())
                 {
 
-                    Log.e("onDataChange", "onDataChange");
                     intromsg.setText(snapshot.child("introduce").getValue().toString());
                     introtitle.setText(introKey);
                     Glide.with(introimg.getContext()).load(snapshot.child("pic_url").getValue().toString()).into(introimg);
-                    Log.e("introtitle", String.valueOf(introtitle));
-                    Log.e("intromsg", String.valueOf(intromsg));
 
                     introtitle.setVisibility(View.VISIBLE);
                     intromsg.setVisibility(View.VISIBLE);
@@ -81,7 +74,6 @@ public class IntroduceActivity extends AppCompatActivity
             @Override
             public void onCancelled(@NonNull DatabaseError error)
             {
-                Log.e("onCancelled","onCancelled");
 
             }
         });
@@ -102,4 +94,3 @@ public class IntroduceActivity extends AppCompatActivity
         intromsg.animate().translationY(0).alpha(1).setDuration(700).setStartDelay(300).start();
     }
 }
-

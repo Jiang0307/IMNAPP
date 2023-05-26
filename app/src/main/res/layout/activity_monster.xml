@@ -8,7 +8,9 @@
     tools:context=".MonsterActivity">
 
     <ImageView
+        android:visibility="visible"
         android:id="@+id/attraction_backimgbtn"
+        android:src="@drawable/back"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginLeft="10dp"
