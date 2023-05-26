@@ -47,6 +47,7 @@ public class MonsterActivity extends AppCompatActivity
         // recyclerView.setLayoutManager(layoutManager);
 
         // 到firebase取出所有妖怪
+        // nonogram一開始選哪隻的時候來這邊幹code
         FirebaseRecyclerOptions<get_monster_info> options =
                 new FirebaseRecyclerOptions.Builder<get_monster_info>()
                         .setQuery(FirebaseDatabase.getInstance().getReference().child("monsters"), get_monster_info.class)
