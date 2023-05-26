@@ -72,7 +72,7 @@ public class NonogramActivity extends AppCompatActivity implements RecyclerViewA
         int numberOfColumns = 15;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nonogram);
-
+ 
         String[] answer = new_game();
 
         String[] data =
