@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/logo_img"
-            android:text="成 大 校 園 景 點 辨 識 系 統"
+            android:text="金 價 妖 獸 - 山 海 經 數 織 遊 戲"
             android:textColor="#000000"
             android:textSize="24dp"
             android:textStyle="bold"

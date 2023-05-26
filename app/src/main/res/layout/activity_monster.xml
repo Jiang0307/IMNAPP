@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="山 海 經 妖 獸 景 點 資 訊"
+            android:text="山 海 經 妖 獸 資 訊"
             android:textColor="#34495E"
             android:textSize="24dp"
             android:textStyle="bold"

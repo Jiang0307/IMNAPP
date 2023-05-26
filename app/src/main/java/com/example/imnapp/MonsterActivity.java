@@ -1,15 +1,18 @@
 package com.example.imnapp;
 
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.util.Xml;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.xmlpull.v1.XmlPullParser;
 
 public class MonsterActivity extends AppCompatActivity
 {
@@ -19,7 +22,8 @@ public class MonsterActivity extends AppCompatActivity
     ImageView attraction_backImg_Btn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monster);
 
@@ -30,13 +34,18 @@ public class MonsterActivity extends AppCompatActivity
         attraction_backImg_Btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 finish();
             }
         });
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(layoutManager);
+        XmlPullParser parser = getResources().getLayout(R.layout.recycler);
+        AttributeSet attrs = Xml.asAttributeSet(parser);
+
+        recyclerView.setLayoutManager(new WrapContentGridLayoutManager(this, attrs,0,0));
+        // GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        // recyclerView.setLayoutManager(layoutManager);
 
         // 到firebase取出所有妖怪
         FirebaseRecyclerOptions<get_monster_info> options =

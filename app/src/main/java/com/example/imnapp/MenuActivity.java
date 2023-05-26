@@ -17,13 +17,15 @@ public class MenuActivity extends AppCompatActivity {
     LinearLayout main_order;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         init();
     }
 
-    private void init() {
+    private void init()
+    {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         getWindow().setEnterTransition(null);
 
@@ -36,14 +38,13 @@ public class MenuActivity extends AppCompatActivity {
         viewAnimation();
     }
 
-    //開啟相機函式 -> 詢問權限
     public void nonogram_listener(View view)
     {
         Intent camIntent = new Intent(this, NonogramActivity.class);
         startActivity(camIntent);
     }
 
-    //進入景點介紹
+    //進入妖獸介紹
     public void monster_listener(View view)
     {
         Intent attractionIntent = new Intent(this, MonsterActivity.class);
@@ -51,7 +52,8 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     //動畫設定
-    private void viewAnimation() {
+    private void viewAnimation()
+    {
         main_order.setTranslationY(900);
 
         float alpha = (float) 0.1;
