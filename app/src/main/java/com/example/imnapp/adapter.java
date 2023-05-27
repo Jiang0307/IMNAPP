@@ -40,7 +40,8 @@ public class adapter extends FirebaseRecyclerAdapter<get_monster_info, adapter.v
             public void onClick(View v)
             {
                 Intent introduceIntent = new Intent(context, IntroduceActivity.class);
-                introduceIntent.putExtra("getIntroduceKey", getRef(position).getKey());
+                introduceIntent.putExtra("monster_name", getRef(position).getKey());
+                introduceIntent.putExtra("from_nonogram","false");
                 context.startActivity(introduceIntent);
             }
         });

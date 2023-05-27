@@ -97,8 +97,6 @@ public class NonogramActivity extends AppCompatActivity implements RecyclerViewA
                         temp = "";
                     }
                 }
-                Log.d("monster_index 9999", String.valueOf(monster_index));
-                Log.d("monster_name 9999", String.valueOf(monster_name));
                 // set recycler view
                 set_recyclerview();
             }

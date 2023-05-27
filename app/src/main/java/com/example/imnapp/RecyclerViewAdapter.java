@@ -111,7 +111,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             if(check_answer()==true)
             {
                 Intent introduceIntent = new Intent(context, IntroduceActivity.class);
-                introduceIntent.putExtra("getIntroduceKey", monster_name);
+                introduceIntent.putExtra("monster_name", monster_name);
+                introduceIntent.putExtra("from_nonogram", "true");
+//                introduceIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP + Intent.FLAG_ACTIVITY_NEW_TASK);
                 introduceIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
                 context.startActivity(introduceIntent);
             }

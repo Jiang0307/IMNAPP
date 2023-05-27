@@ -22,9 +22,9 @@
 
     <TextView
         android:id="@+id/main_title_tv"
-        android:layout_width="342dp"
-        android:layout_height="47dp"
-        android:layout_marginLeft="3dp"
+        android:layout_width="345dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="25dp"
         android:layout_toRightOf="@id/logo_img"
         android:text="          金     價     妖     獸     "
@@ -43,8 +43,6 @@
         android:paddingLeft="20dp"
         android:paddingTop="20dp"
         android:paddingRight="20dp">
-        android:layout_centerVertical="true"
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -134,7 +132,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/background_3"
+            android:background="@drawable/background_2"
             android:onClick="nonogram_listener"
             android:paddingLeft="25dp"
             android:paddingTop="10dp"
@@ -148,7 +146,7 @@
                 android:layout_centerVertical="true"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/logo" />
+                android:src="@drawable/nonogram" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -169,29 +167,57 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="點 擊進 行 數 織 遊 戲"
+                    android:text="點 擊 進 行 數 織 遊 戲"
                     android:textColor="#FFF" />
 
             </LinearLayout>
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="75dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:background="@color/ic_launcher_background"
-            android:clickable="false"
+            android:background="@drawable/background_3"
             android:paddingLeft="25dp"
             android:paddingTop="10dp"
             android:paddingRight="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:onClick="favorite_listener">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/favorite" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:orientation="vertical" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:text="我 的 最 愛"
+                    android:textColor="#FFF"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="點 擊 進 入 我 的 最 愛 清 單"
+                    android:textColor="#FFF" />
+
+            </LinearLayout>
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="75dp"

@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity 
+{
 
     ImageView logo_image;
     TextView titletv;
@@ -38,18 +39,26 @@ public class MenuActivity extends AppCompatActivity {
         viewAnimation();
     }
 
-    public void nonogram_listener(View view)
-    {
-        Intent camIntent = new Intent(this, NonogramActivity.class);
-        startActivity(camIntent);
-    }
-
     //進入妖獸介紹
     public void monster_listener(View view)
     {
-        Intent attractionIntent = new Intent(this, MonsterActivity.class);
-        startActivity(attractionIntent);
+        Intent monster_intent = new Intent(this, MonsterActivity.class);
+        startActivity(monster_intent);
     }
+
+    public void nonogram_listener(View view)
+    {
+        Intent nonogram_intent = new Intent(this, NonogramActivity.class);
+//        nonogram_intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP + Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(nonogram_intent);
+    }
+
+    public void favorite_listener(View view)
+    {
+        Intent favorite_intent = new Intent(this, FavoriteActivity.class);
+        startActivity(favorite_intent);
+    }
+
 
     //動畫設定
     private void viewAnimation()
