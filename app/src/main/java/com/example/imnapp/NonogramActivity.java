@@ -1,5 +1,6 @@
 package com.example.imnapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,18 +19,39 @@ import java.util.ArrayList;
 
 public class NonogramActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener
 {
+    private static Context ctx;
     RecyclerViewAdapter adapter;
-    static int num_monster;
-    static int monster_index; //隨機選一隻怪物
-    static String monster_name;
-    static String[] monster_answer;
+    int num_monster, monster_index;
+    String monster_name;
+    String[] monster_answer;
 
-    private String[] new_game()
+    @Override
+    public void onCreate(Bundle savedInstanceState)
     {
-        String[] answer = new String[225];
+        super.onCreate(savedInstanceState);
+        ctx = getApplicationContext();
+
+        setContentView(R.layout.activity_nonogram);
+        init();
+    }
+
+    public void set_recyclerview()
+    {
+        int size = 20;
+        // set up the RecyclerView
+        RecyclerView recyclerView = findViewById(R.id.rvNumbers);
+        recyclerView.setLayoutManager(new GridLayoutManager(ctx, size));
+        adapter = new RecyclerViewAdapter(ctx, monster_answer);
+        // adapter.setClickListener();
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void init()
+    {
+        //------------------------------------
         ArrayList<String> monsters = new ArrayList<String>();
         DatabaseReference root_ref = FirebaseDatabase.getInstance().getReference().child("monsters");
-        root_ref.addValueEventListener(new ValueEventListener()
+        root_ref.addListenerForSingleValueEvent(new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot)
@@ -40,66 +62,28 @@ public class NonogramActivity extends AppCompatActivity implements RecyclerViewA
                     String key = childSnapshot.getKey();
                     monsters.add(key);
                 }
-                NonogramActivity.num_monster = monsters.size(); // 總共幾隻
-                for(int i=0; i<num_monster; i++)
-                {
-                    Log.d("name", monsters.get(i));
-                }
-                NonogramActivity.monster_index = (int)(Math.random()*(num_monster)); // 隨機產生妖獸的index
-                NonogramActivity.monster_name = monsters.get(monster_index);
-                Log.d("monster_name", monster_name);
-
+                num_monster = monsters.size(); // 總共幾隻
+                monster_index = (int) (Math.random() * (num_monster)); // 隨機產生妖獸的index
+                monster_name = monsters.get(monster_index);
                 // 用monster_name到妖獸階層，再用answer取出妖獸的答案
                 int idx = 0;
                 char[] temp_answer = dataSnapshot.child(monster_name).child("answer").getValue().toString().toCharArray();
+                monster_answer = new String[400];
                 for(int i=0; i<temp_answer.length; i++)
                 {
                     if( temp_answer[i] != ',' )
                     {
-                        answer[idx++] = String.valueOf(temp_answer[i]);
+                        monster_answer[idx++] = String.valueOf(temp_answer[i]);
                     }
                 }
+                Log.d("monster_index 9999", String.valueOf(monster_index));
+                Log.d("monster_name 9999", String.valueOf(monster_name));
+                // set recycler view
+                set_recyclerview();
             }
             @Override
             public void onCancelled(DatabaseError error){ }
         });
-        return answer;
-    };
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        int numberOfColumns = 15;
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nonogram);
- 
-        String[] answer = new_game();
-
-        String[] data =
-        {
-        " ", " ", " ", " ", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
-        " ", " ", " ", " ", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
-        " ", " ", " ", " ", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
-        " ", " ", " ", " ", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15",
-        "1", "2", "3", "4", " ", " ", " ", " ", " ", "  ", "  ", "  ", "  ", "  ", "  ",
-        "1", "2", "3", "4", " ", " ", " ", " ", " ", "  ", "  ", "  ", "  ", "  ", "  ",
-        "1", "2", "3", "4", " ", " ", " ", " ", " ", "  ", "  ", "  ", "  ", "  ", "  ",
-        "1", "2", "3", "4", " ", " ", " ", " ", " ", "  ", "  ", "  ", "  ", "  ", "  ",
-        "1", "2", "3", "4", " ", " ", " ", " ", " ", "  ", "  ", "  ", "  ", "  ", "  ",
-        "1", "2", "3", "4", " ", " ", " ", " ", " ", "  ", "  ", "  ", "  ", "  ", "  ",
-        "1", "2", "3", "4", " ", " ", " ", " ", " ", "  ", "  ", "  ", "  ", "  ", "  ",
-        "1", "2", "3", "4", " ", " ", " ", " ", " ", "  ", "  ", "  ", "  ", "  ", "  ",
-        "1", "2", "3", "4", " ", " ", " ", " ", " ", "  ", "  ", "  ", "  ", "  ", "  ",
-        "1", "2", "3", "4", " ", " ", " ", " ", " ", "  ", "  ", "  ", "  ", "  ", "  ",
-        "1", "2", "3", "4", " ", " ", " ", " ", " ", "  ", "  ", "  ", "  ", "  ", "  "
-        };
-
-        // set up the RecyclerView
-        RecyclerView recyclerView = findViewById(R.id.rvNumbers);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        adapter = new RecyclerViewAdapter(this, data);
-        adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);
     }
 
     @Override

@@ -15,6 +15,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private String[] mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
+    boolean state;
 
     // data is passed into the constructor
     RecyclerViewAdapter(Context context, String[] data)
@@ -38,20 +39,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int current_index)
     {
         holder.myButton.setText(mData[current_index]);
-//        Log.e("current_index", String.valueOf(current_index));
+        int row = current_index/20;
+        int col = current_index%20;
 
-        int row = current_index/15;
-        int col = current_index%15;
-//        Log.e("row: ", String.valueOf(row));
-//        Log.e("col: ", String.valueOf(col));
-
-        if (row > 3 && col > 3)
+        if (row > 4 && col > 4)
         {
             holder.myButton.setClickable(false);
         }
         else
         {
             holder.myButton.setClickable(true);
+            holder.myButton.setBackgroundColor(R.color.gray);
         }
     }
 
