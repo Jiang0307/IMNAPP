@@ -22,14 +22,17 @@
         android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
-        <Switch
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/nonogram_switch"
             android:checked="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:scaleX="3"
-            android:scaleY="3" />
+            android:thumb="@drawable/thumb_icon"
+            app:track="@drawable/track"
+            android:scaleX="2"
+            android:scaleY="2"
+            app:showText="false" />
+
     </LinearLayout>
 
 </RelativeLayout>

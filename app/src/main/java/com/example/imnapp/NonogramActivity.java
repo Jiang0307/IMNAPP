@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class NonogramActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener
 {
-    Switch nonogram_switch;
+    SwitchCompat nonogram_switch;
     RecyclerViewAdapter adapter;
     private static Context ctx;
     int num_monster, monster_index;
