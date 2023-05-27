@@ -84,11 +84,17 @@ public class NonogramActivity extends AppCompatActivity implements RecyclerViewA
                 int idx = 0;
                 char[] temp_answer = dataSnapshot.child(monster_name).child("answer").getValue().toString().toCharArray();
                 monster_answer = new String[400];
+                String temp = "";
                 for(int i=0; i<temp_answer.length; i++)
                 {
                     if( temp_answer[i] != ',' )
                     {
-                        monster_answer[idx++] = String.valueOf(temp_answer[i]);
+                        temp = temp + temp_answer[i];
+                    }
+                    else
+                    {
+                        monster_answer[idx++] = String.valueOf(temp);
+                        temp = "";
                     }
                 }
                 Log.d("monster_index 9999", String.valueOf(monster_index));

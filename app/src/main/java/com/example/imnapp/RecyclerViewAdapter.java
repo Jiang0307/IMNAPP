@@ -24,6 +24,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
+    public Button[] button_array = new Button[400];
+
     // data is passed into the constructor
     RecyclerViewAdapter(Context ctx,String name, String[] answer)
     {
@@ -50,6 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.myButton.setText(monster_answer[current_index]);
         holder.myButton.setTag(String.valueOf(current_index));
 
+        button_array[current_index] = holder.myButton;
 
         int row = current_index/20;
         int col = current_index%20;
@@ -118,6 +121,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         {
             if(current_board[399]=="O")
                 return true;
+            else if(current_board[398]=="O")
+            {
+                button_array[397].setBackgroundColor(Color.rgb(0,255,0));
+                return false;
+            }
             else
                 return false;
         }
