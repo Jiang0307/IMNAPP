@@ -2,6 +2,9 @@ package com.example.imnapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,18 +13,24 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>
+{
+    public static boolean state = true;
+    private String monster_name;
+    private String[] monster_answer;
+    Context context;
+    private String[] current_board = new String[400];
 
-    private String[] mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
-    boolean state;
 
     // data is passed into the constructor
-    RecyclerViewAdapter(Context context, String[] data)
+    RecyclerViewAdapter(Context ctx,String name, String[] answer)
     {
-        this.mInflater = LayoutInflater.from(context);
-        this.mData = data;
+        this.monster_name = name;
+        this.monster_answer = answer;
+        this.context = ctx;
+        this.mInflater = LayoutInflater.from(ctx);
     }
 
     // inflates the cell layout from xml when needed
@@ -38,18 +47,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int current_index)
     {
-        holder.myButton.setText(mData[current_index]);
+        holder.myButton.setText(monster_answer[current_index]);
+        holder.myButton.setTag(String.valueOf(current_index));
+
+
         int row = current_index/20;
         int col = current_index%20;
 
         if (row > 4 && col > 4)
         {
             holder.myButton.setClickable(false);
+            holder.myButton.setText(" ");
         }
         else
         {
             holder.myButton.setClickable(true);
-            holder.myButton.setBackgroundColor(R.color.gray);
+            holder.myButton.setBackgroundColor(Color.rgb(169,169,169));
         }
     }
 
@@ -57,7 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public int getItemCount()
     {
-        return mData.length;
+        return monster_answer.length;
     }
 
     // stores and recycles views as they are scrolled off screen
@@ -76,18 +89,44 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onClick(View view)
         {
-            myButton.setBackgroundColor(R.color.purple_200);
-            if (mClickListener != null)
+            String tag = (String) myButton.getTag();
+            int idx = Integer.valueOf(tag);
+            Log.d("index",tag);
+
+            if(state == true)
             {
-                mClickListener.onItemClick(view, getAdapterPosition());
+                current_board[idx] = "O";
+                myButton.setText("O");
+                myButton.setBackgroundColor(Color.rgb(198,115,255));
             }
+            else
+            {
+                current_board[idx] = "X";
+                myButton.setText("X");
+                myButton.setBackgroundColor(Color.rgb(255,255,255));
+            }
+            if(check_answer()==true)
+            {
+                Intent introduceIntent = new Intent(context, IntroduceActivity.class);
+                introduceIntent.putExtra("getIntroduceKey", monster_name);
+                introduceIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                context.startActivity(introduceIntent);
+            }
+        }
+
+        public boolean check_answer()
+        {
+            if(current_board[399]=="O")
+                return true;
+            else
+                return false;
         }
     }
 
     // convenience method for getting data at click position
     String getItem(int idx)
     {
-        return mData[idx];
+        return monster_answer[idx];
     }
 
     // allows clicks events to be caught

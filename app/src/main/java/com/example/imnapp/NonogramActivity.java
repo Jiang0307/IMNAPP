@@ -1,9 +1,12 @@
 package com.example.imnapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -19,20 +22,33 @@ import java.util.ArrayList;
 
 public class NonogramActivity extends AppCompatActivity implements RecyclerViewAdapter.ItemClickListener
 {
-    private static Context ctx;
+    Switch nonogram_switch;
     RecyclerViewAdapter adapter;
+    private static Context ctx;
     int num_monster, monster_index;
     String monster_name;
     String[] monster_answer;
+//    public sta boolean state = true; // true:O false:X
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        init();
         super.onCreate(savedInstanceState);
         ctx = getApplicationContext();
-
         setContentView(R.layout.activity_nonogram);
-        init();
+
+        nonogram_switch = findViewById(R.id.nonogram_switch);
+        nonogram_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                RecyclerViewAdapter.state = !RecyclerViewAdapter.state;
+                Log.d("state", String.valueOf(RecyclerViewAdapter.state));
+            }
+        });
+
     }
 
     public void set_recyclerview()
@@ -41,8 +57,7 @@ public class NonogramActivity extends AppCompatActivity implements RecyclerViewA
         // set up the RecyclerView
         RecyclerView recyclerView = findViewById(R.id.rvNumbers);
         recyclerView.setLayoutManager(new GridLayoutManager(ctx, size));
-        adapter = new RecyclerViewAdapter(ctx, monster_answer);
-        // adapter.setClickListener();
+        adapter = new RecyclerViewAdapter(ctx, monster_name , monster_answer);
         recyclerView.setAdapter(adapter);
     }
 
