@@ -96,6 +96,11 @@ public class NonogramActivity extends AppCompatActivity implements RecyclerViewA
                         monster_answer[idx++] = String.valueOf(temp);
                         temp = "";
                     }
+
+                    if(i == temp_answer.length-1)
+                    {
+                        monster_answer[idx++] = String.valueOf(temp);
+                    }
                 }
                 // set recycler view
                 set_recyclerview();
