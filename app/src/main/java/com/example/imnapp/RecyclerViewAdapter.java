@@ -100,13 +100,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             {
                 current_board[idx] = "O";
                 myButton.setText("O");
-                myButton.setBackgroundColor(Color.rgb(198,115,255));
+                myButton.setBackgroundColor(Color.rgb(0,0,0));
             }
             else
             {
                 current_board[idx] = "X";
                 myButton.setText("X");
-                myButton.setBackgroundColor(Color.rgb(255,255,255));
+                myButton.setBackgroundColor(0);
             }
             if(check_answer()==true)
             {
@@ -121,15 +121,40 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public boolean check_answer()
         {
-            if(current_board[399]=="O")
-                return true;
-            else if(current_board[398]=="O")
+//            for(int i = 0; i < 400; i++)
+//            {
+//                Log.d("55555",monster_answer[i]);
+////                if(monster_answer[i] != null){
+////                    Log.d("55555",String.valueOf(i));
+////                }
+//            }
+            for(int i = 105; i < 400; i++)
             {
-                button_array[397].setBackgroundColor(Color.rgb(0,255,0));
-                return false;
+                if(i % 20 < 5)
+                {
+                    continue;
+                }
+
+                Log.d("55555",String.valueOf(i));
+                Log.d("55555",monster_answer[i]);
+                if(current_board[i] == null && monster_answer[i].equals("O"))
+                {
+                    return false;
+                }
+                else if(current_board[i] == null && monster_answer[i].equals("X"))
+                {
+                    continue;
+                }
+
+                if(! current_board[i].equals(monster_answer[i]))
+                {
+                    Log.d("55555",String.valueOf(i));
+                    Log.d("55555",current_board[i]);
+                    Log.d("55555",monster_answer[i]);
+                    return false;
+                }
             }
-            else
-                return false;
+            return true;
         }
     }
 
